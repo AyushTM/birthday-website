@@ -1,0 +1,222 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rose: var(--rose);
+  --color-gold: var(--gold);
+  --color-lilac: var(--lilac);
+  --font-display: "Playfair Display", serif;
+  --font-script: "Dancing Script", cursive;
+  --font-sans: "Poppins", sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.18 0.04 320);
+  --foreground: oklch(0.98 0.01 320);
+  --card: oklch(0.22 0.05 320 / 0.6);
+  --card-foreground: oklch(0.98 0.01 320);
+  --popover: oklch(0.22 0.05 320);
+  --popover-foreground: oklch(0.98 0.01 320);
+  --primary: oklch(0.75 0.18 350);
+  --primary-foreground: oklch(0.15 0.02 320);
+  --secondary: oklch(0.78 0.14 300);
+  --secondary-foreground: oklch(0.15 0.02 320);
+  --muted: oklch(0.28 0.04 320);
+  --muted-foreground: oklch(0.78 0.03 320);
+  --accent: oklch(0.85 0.17 85);
+  --accent-foreground: oklch(0.15 0.02 320);
+  --destructive: oklch(0.65 0.24 25);
+  --border: oklch(1 0 0 / 0.15);
+  --input: oklch(1 0 0 / 0.15);
+  --ring: oklch(0.75 0.18 350);
+  --rose: oklch(0.78 0.16 0);
+  --gold: oklch(0.85 0.17 85);
+  --lilac: oklch(0.78 0.12 300);
+
+  --gradient-hero: linear-gradient(135deg, oklch(0.3 0.1 340) 0%, oklch(0.25 0.12 290) 50%, oklch(0.3 0.08 240) 100%);
+  --gradient-pastel: linear-gradient(135deg, oklch(0.9 0.06 350) 0%, oklch(0.92 0.05 300) 50%, oklch(0.93 0.07 60) 100%);
+  --gradient-romance: linear-gradient(135deg, oklch(0.25 0.08 350) 0%, oklch(0.2 0.06 320) 50%, oklch(0.18 0.05 280) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.85 0.17 85), oklch(0.78 0.16 50));
+  --gradient-rose: linear-gradient(135deg, oklch(0.78 0.16 0), oklch(0.7 0.2 340));
+
+  --shadow-glow: 0 0 60px oklch(0.75 0.18 350 / 0.4);
+  --shadow-soft: 0 20px 60px -20px oklch(0.1 0.05 320 / 0.5);
+  --shadow-card: 0 8px 32px oklch(0.1 0.05 320 / 0.37);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { overflow-x: hidden; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+/* === Reusable utility classes === */
+.glass {
+  background: oklch(1 0 0 / 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid oklch(1 0 0 / 0.15);
+  box-shadow: var(--shadow-card);
+}
+.glass-light {
+  background: oklch(1 0 0 / 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid oklch(1 0 0 / 0.5);
+}
+.gradient-hero { background: var(--gradient-hero); }
+.gradient-pastel { background: var(--gradient-pastel); }
+.gradient-romance { background: var(--gradient-romance); }
+.text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-rose {
+  background: var(--gradient-rose);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.shadow-glow { box-shadow: var(--shadow-glow); }
+.shadow-soft { box-shadow: var(--shadow-soft); }
+
+/* === Animations === */
+@keyframes float-up {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift), -140vh, 0) rotate(12deg);
+    opacity: 0;
+  }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+@keyframes drop-banner {
+  0% { transform: translateY(-200%) rotate(-2deg); }
+  60% { transform: translateY(10%) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  50% { transform: scaleY(1.1) scaleX(0.95); opacity: 0.9; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.85 0.17 85 / 0.5), 0 0 40px oklch(0.78 0.16 0 / 0.3); }
+  50% { box-shadow: 0 0 40px oklch(0.85 0.17 85 / 0.8), 0 0 80px oklch(0.78 0.16 0 / 0.5); }
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(var(--drift, 0)); opacity: 0; }
+}
+@keyframes sparkle {
+  0%, 100% { transform: scale(0) rotate(0); opacity: 0; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+}
+@keyframes heart-float {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes smoke-rise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+  100% { transform: translateY(-80px) scale(2); opacity: 0; }
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes spin-3d {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(360deg); }
+}
+@keyframes firework {
+  0% { transform: translate(0,0); opacity: 1; }
+  100% { transform: translate(var(--fx,0), var(--fy,0)); opacity: 0; }
+}
+
+.animate-float-soft { animation: float-soft 6s ease-in-out infinite; }
+.animate-sway { animation: sway 3s ease-in-out infinite; transform-origin: top center; }
+.animate-flicker { animation: flicker 0.4s ease-in-out infinite; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.8s ease-out both; }
+.animate-drop-banner { animation: drop-banner 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+.btn-festive {
+  position: relative;
+  padding: 0.9rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, oklch(0.7 0.22 340), oklch(0.65 0.2 290));
+  box-shadow: 0 10px 30px -10px oklch(0.7 0.22 340 / 0.6);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid oklch(1 0 0 / 0.2);
+}
+.btn-festive:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 20px 40px -10px oklch(0.7 0.22 340 / 0.8); }
+.btn-festive:active { transform: translateY(0) scale(0.98); }
+
+.btn-gold {
+  background: var(--gradient-gold);
+  color: oklch(0.2 0.05 60);
+  box-shadow: 0 10px 30px -10px oklch(0.85 0.17 85 / 0.6);
+}
+.btn-gold:hover { box-shadow: 0 20px 40px -10px oklch(0.85 0.17 85 / 0.9); }
+
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
