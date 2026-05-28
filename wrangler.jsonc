@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler",
+  "name": "birthday-website",
+  "compatibility_date": "2026-05-28",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS"
+  },
+
+  "main": "./dist/server/server.js"
+}
